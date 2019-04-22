@@ -15,3 +15,5 @@ EscapeRoom/Content/StarterContent/
 *.VC.db
 *.VC.db-shm
 *.VC.db-wal
+*.ipch
+*.opendb
