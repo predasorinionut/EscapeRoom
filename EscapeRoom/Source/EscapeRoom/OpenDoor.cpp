@@ -44,6 +44,9 @@ void UOpenDoor::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompon
 			CloseDoor();
 		}
 	}
+
+	// Poll if the chair is overlapping the actor that opens
+		// If true, grab the chair
 }
 
 void UOpenDoor::OpenDoor()
