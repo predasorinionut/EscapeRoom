@@ -29,10 +29,15 @@ public:
 	void CloseDoor();
 
 private:
-	float rotationYaw = 0.f;
-	float doorSpeed = 0.5f;
-	float doorOpenedAngle = -90.f;
-	float doorClosedAngle = 0.f;
+	float RotationYaw = 0.f;
+	UPROPERTY(EditAnywhere)
+	float DoorSpeed = 1.f;
+	UPROPERTY(EditAnywhere)
+	float DoorClosingDelay = 0.5f;
+	UPROPERTY(EditAnywhere)
+	float DoorOpenedAngle = -90.f;
+	float DoorClosedAngle = 0.f;
+	float LastDoorOpenTime;
 
 	AActor* Owner;
 	AActor* ActorThatOpens;

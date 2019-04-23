@@ -36,29 +36,28 @@ void UOpenDoor::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompon
 	// If the ActorThatOpens is in the volume
 	if (PressurePlate->IsOverlappingActor(ActorThatOpens)) {
 		OpenDoor();
+		LastDoorOpenTime = GetWorld()->GetTimeSeconds();
 	}
 	else
 	{
-		CloseDoor();
+		if (GetWorld()->GetTimeSeconds() - LastDoorOpenTime >= DoorClosingDelay) {
+			CloseDoor();
+		}
 	}
 }
 
 void UOpenDoor::OpenDoor()
 {
-	if (rotationYaw > doorOpenedAngle) {
-		rotationYaw -= doorSpeed;
-
-		FRotator NewRotator = FRotator(0.f, rotationYaw, 0.f);
-		Owner->SetActorRotation(NewRotator);
+	if (RotationYaw > DoorOpenedAngle) {
+		RotationYaw -= DoorSpeed;
+		Owner->SetActorRotation(FRotator(0.f, RotationYaw, 0.f));
 	}
 }
 
 void UOpenDoor::CloseDoor()
 {
-	if (rotationYaw < doorClosedAngle) {
-		rotationYaw += doorSpeed;
-
-		FRotator NewRotator = FRotator(0.f, rotationYaw, 0.f);
-		Owner->SetActorRotation(NewRotator);
+	if (RotationYaw < DoorClosedAngle) {
+		RotationYaw += DoorSpeed;
+		Owner->SetActorRotation(FRotator(0.f, RotationYaw, 0.f));
 	}
 }
