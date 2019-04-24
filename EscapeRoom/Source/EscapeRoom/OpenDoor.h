@@ -44,8 +44,12 @@ private:
 	float LastDoorOpenTime;
 
 	AActor* Owner;
-	AActor* ActorThatOpens;
 
 	UPROPERTY(EditAnywhere)
 	ATriggerVolume* PressurePlate;
+	
+	UPROPERTY(EditAnywhere)
+	float TriggerMass = 90.f;
+
+	float GetTotalMassOfActorsInTriggerVolume();
 };
