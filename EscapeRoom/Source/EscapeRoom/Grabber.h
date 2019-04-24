@@ -24,6 +24,7 @@ protected:
 	virtual void BeginPlay() override;
 
 private:
+	UPROPERTY(EditAnywhere)
 	float Reach = 100.f;
 		
 	UPhysicsHandleComponent* PhysicsHandle = nullptr;
@@ -31,8 +32,11 @@ private:
 
 	void Grab();
 	void Release();
-	void FindPhysicsHandleComponent();
+	bool FindPhysicsHandleComponent();
 	void SetupInputController();
 	// Return hit for first physics body in reach
 	const FHitResult GetFirstPhysicsBodyInReach();
+
+	FVector GetReachLineStart();
+	FVector GetReachLineEnd();
 };
