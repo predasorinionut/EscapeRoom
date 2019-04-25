@@ -38,40 +38,11 @@ void UOpenDoor::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompon
 	// Poll the Trigger Volume
 	// If the ActorThatOpens is in the volume
 	if (GetTotalMassOfActorsInTriggerVolume() >= TriggerMass) {
-		OpenDoor();
-		LastDoorOpenTime = GetWorld()->GetTimeSeconds();
+		OnOpen.Broadcast();
 	}
-	else if (LastDoorOpenTime != NULL && GetWorld()->GetTimeSeconds() - LastDoorOpenTime >= DoorClosingDelay)
+	else
 	{
-		CloseDoor();
-	}
-}
-
-void UOpenDoor::OpenDoor()
-{
-	if (!Owner)
-	{
-		UE_LOG(LogTemp, Error, TEXT("Owner is missing!"))
-		return;
-	}
-
-	if (RotationYaw > DoorOpenedAngle) {
-		RotationYaw -= DoorSpeed;
-		Owner->SetActorRotation(FRotator(0.f, RotationYaw, 0.f));
-	}
-}
-
-void UOpenDoor::CloseDoor()
-{
-	if (!Owner)
-	{
-		UE_LOG(LogTemp, Error, TEXT("Owner is missing!"))
-		return;
-	}
-
-	if (RotationYaw < DoorClosedAngle) {
-		RotationYaw += DoorSpeed;
-		Owner->SetActorRotation(FRotator(0.f, RotationYaw, 0.f));
+		OnClose.Broadcast();
 	}
 }
 
